@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat untuk dirimu</title>
+    <style>
+        body {
+            background-color: #FFB6C1; /* Latar belakang pink muda */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            padding: 20px; /* Tambahkan padding */
+            color: black; /* Teks berwarna hitam */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Pusatkan konten secara horizontal */
+        }
+
+        #surat {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: white; /* Latar belakang surat putih */
+            color: black; /* Teks surat berwarna hitam */
+            display: none; /* Sembunyikan surat pada awalnya */
+            border-radius: 10px;
+            white-space: pre-wrap; /* Mempertahankan spasi dan baris baru */
+            overflow: hidden; /* Sembunyikan teks yang tidak terlihat */
+        }
+
+        #audio-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px; /* Jarak atas untuk audio */
+        }
+
+        #band-image {
+            width: 100%; /* Ukuran gambar band 100% dari kontainer */
+            max-width: 300px; /* Maksimal lebar gambar */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        #love-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: pink; /* Warna tombol */
+            color: black; /* Teks tombol berwarna hitam */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Sembunyikan tombol pada awalnya */
+        }
+
+        #love-button:hover {
+            background-color: #ff69b4; /* Warna tombol saat hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Selamat Pagi Nailaa </h1>
+    <div id="audio-container">
+        <img id="band-image" src="data:image/jpeg;base64,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" alt="Gambar Bunga"> <!-- Ganti dengan nama file gambar Anda -->
+        <audio id="audio" controls>
+            <source src="Andmesh Kamaleng - Cinta Luar Biasa (Official Music Video).mp3" type="audio/mpeg"> <!-- Ganti dengan nama file lagu Anda -->
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+    <button id="love-button">💖 Buka Surat </button> <!-- Tombol untuk membuka surat -->
+    <div id="surat"></div> <!-- Surat akan ditampilkan di sini -->
+    
+    <script>
+        const suratText = `
+Selamat pagi, Naila. 
+
+Maaf sebelumnya saya mengganggu waktu dirimu.
+
+Saya cuma mau menyampaikan pesan aja.. selamat pagi Naila.
+Semoga hari mu ini bisa menjadi lebih baik dari sebelumnya yaaa..
+Tauu gasii kalau ada yang suka memperhatikan mu dari kejauhan.
+
+"Naila, kamu itu punya aura yang beda. 
+Bukan cuma karena kamu cantik, bukan karena manis senyummu, tapi ada sesuatu dalam caramu membawa diri, cara kamu tersenyum, berbicara, dan memperlakukan orang lain. Rasanya selalu ada ketenangan dan kehangatan di dekatmu. Jujur, aku kagum sama caramu melihat dunia, dan hal-hal kecil yang kamu sukai.
+
+Kamu itu sungguh sangat istimewa dibandingkan orang lain yang mengenalku.
+
+Kalau kamu mau ada cerita, aku mau ko dengerin apa yang mau kamu ceritainn, chat ajaa gapapaa koo
+Saya sangat menghargai dirimu kokkk.
+
+Aku akan selalu mendukungmu dan mensupport diri mu Koo tetap semangat yaaa.
+
+You are my favorite person.🤍🤍
+        `;
+
+        document.getElementById('audio').addEventListener('play', function() {
+            document.getElementById('love-button').style.display = 'block'; // Tampilkan tombol saat audio diputar
+        });
+
+        document.getElementById('love-button').addEventListener('click', function() {
+            typeWriter(suratText, 0); // Mulai efek ketikan saat tombol diklik
+        });
+
+        function typeWriter(text, i) {
+            document.getElementById('surat').style.display = 'block'; // Tampilkan surat
+            if (i < text.length) {
+                document.getElementById('surat').innerHTML += text.charAt(i); // Tambahkan karakter satu per satu
+                setTimeout(() => typeWriter(text, i + 1), 100); // Panggil fungsi lagi setelah 100ms
+            }
+        }
+    </script>
+</body>
+</html>
